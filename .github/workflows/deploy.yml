@@ -1,0 +1,89 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+      - "infrastructure/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {}
+
+# Requerido por aws-actions/configure-aws-credentials para autenticarse
+# vía OIDC — sin access key / secret key estáticas en GitHub Secrets.
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION || 'eu-west-1' }}
+  TF_WORKING_DIR: infrastructure/environments/prod
+  # Variables de Terraform pobladas desde "Repository variables"
+  # (Settings → Secrets and variables → Actions → Variables).
+  # Ninguna es secreta: no hay credenciales de AWS entre ellas.
+  TF_VAR_domain_name: ${{ vars.DOMAIN_NAME }}
+  TF_VAR_bucket_name: ${{ vars.BUCKET_NAME }}
+  TF_VAR_state_bucket_name: ${{ vars.TF_STATE_BUCKET_NAME }}
+  TF_VAR_lock_table_name: ${{ vars.TF_LOCK_TABLE_NAME }}
+  TF_VAR_github_org: ${{ github.repository_owner }}
+  TF_VAR_github_repo: ${{ github.event.repository.name }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install app dependencies
+        working-directory: app
+        run: npm ci
+
+      - name: Build Angular app
+        working-directory: app
+        run: npm run build
+
+      # A partir de aquí se necesita AWS: build ya está hecho y en caché,
+      # así que un fallo aquí no repite trabajo innecesario.
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~> 1.6"
+
+      - name: Terraform init
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform init
+
+      - name: Terraform apply
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform apply -auto-approve
+
+      - name: Sync build to S3
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: |
+          set -euo pipefail
+          BUCKET_NAME=$(terraform output -raw bucket_name)
+          aws s3 sync ../../../app/dist/app/browser "s3://${BUCKET_NAME}" --delete
+
+      - name: Invalidate CloudFront cache
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: |
+          set -euo pipefail
+          DISTRIBUTION_ID=$(terraform output -raw cloudfront_distribution_id)
+          aws cloudfront create-invalidation \
+            --distribution-id "${DISTRIBUTION_ID}" \
+            --paths "/*"

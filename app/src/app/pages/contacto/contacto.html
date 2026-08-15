@@ -1,0 +1,115 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow eyebrow--dark">Contacto</p>
+    <h1>Cuéntanos qué necesitas construir</h1>
+    <p class="page-hero__lead">
+      Respondemos en menos de 48 horas laborables con una primera valoración técnica.
+    </p>
+  </div>
+</section>
+
+<section class="section contact-section">
+  <div class="container contact-grid">
+    <div class="contact-info" appScrollReveal>
+      <h2>Información de contacto</h2>
+      <ul>
+        <li>
+          <app-icon name="map-pin" [size]="20" />
+          <div>
+            <strong>Oficina central</strong>
+            <span>Av. de la Ingeniería 42, 28001 Madrid</span>
+          </div>
+        </li>
+        <li>
+          <app-icon name="phone" [size]="20" />
+          <div>
+            <strong>Teléfono</strong>
+            <span>+34 910 000 000</span>
+          </div>
+        </li>
+        <li>
+          <app-icon name="mail" [size]="20" />
+          <div>
+            <strong>Email</strong>
+            <span>info&#64;construccionesnexus.example</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="contact-form-wrap" appScrollReveal>
+      @if (submitted()) {
+        <div class="form-success">
+          <app-icon name="check" [size]="28" />
+          <h2>Mensaje enviado</h2>
+          <p>
+            Gracias por escribirnos. Este es un formulario de demostración, no se ha
+            enviado ningún dato a un servidor real. Nuestro equipo comercial se
+            pondría en contacto contigo en menos de 48 horas.
+          </p>
+          <button type="button" class="btn btn--outline" (click)="submitted.set(false)">
+            Enviar otro mensaje
+          </button>
+        </div>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <div class="form-row">
+            <label for="name">Nombre completo</label>
+            <input id="name" type="text" formControlName="name" placeholder="Tu nombre" />
+            @if (f.name.invalid && f.name.touched) {
+              <p class="form-error">Introduce un nombre válido (mínimo 2 caracteres).</p>
+            }
+          </div>
+
+          <div class="form-row form-row--split">
+            <div>
+              <label for="email">Email</label>
+              <input id="email" type="email" formControlName="email" placeholder="tu&#64;email.com" />
+              @if (f.email.invalid && f.email.touched) {
+                <p class="form-error">Introduce un email válido.</p>
+              }
+            </div>
+            <div>
+              <label for="phone">Teléfono (opcional)</label>
+              <input id="phone" type="tel" formControlName="phone" placeholder="+34 600 000 000" />
+              @if (f.phone.invalid && f.phone.touched) {
+                <p class="form-error">Introduce un teléfono válido.</p>
+              }
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="service">Servicio de interés</label>
+            <select id="service" formControlName="service">
+              <option value="" disabled>Selecciona un servicio</option>
+              @for (service of services; track service) {
+                <option [value]="service">{{ service }}</option>
+              }
+            </select>
+            @if (f.service.invalid && f.service.touched) {
+              <p class="form-error">Selecciona un servicio.</p>
+            }
+          </div>
+
+          <div class="form-row">
+            <label for="message">Cuéntanos tu proyecto</label>
+            <textarea
+              id="message"
+              rows="5"
+              formControlName="message"
+              placeholder="Describe brevemente el proyecto, ubicación y plazos estimados..."
+            ></textarea>
+            @if (f.message.invalid && f.message.touched) {
+              <p class="form-error">El mensaje debe tener al menos 20 caracteres.</p>
+            }
+          </div>
+
+          <button type="submit" class="btn btn--primary">
+            Enviar mensaje
+            <app-icon name="arrow-right" [size]="18" />
+          </button>
+        </form>
+      }
+    </div>
+  </div>
+</section>

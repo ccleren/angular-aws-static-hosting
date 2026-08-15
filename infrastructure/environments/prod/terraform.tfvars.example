@@ -1,0 +1,26 @@
+# Copia este archivo a terraform.tfvars y ajusta los valores.
+# terraform.tfvars NO se versiona (ver .gitignore).
+
+aws_region             = "eu-west-1"
+domain_name             = "example.com"
+additional_subdomains   = ["www"]
+create_route53_zone     = true
+bucket_name             = "example-com-static-site"
+cloudfront_price_class  = "PriceClass_100"
+
+# CI/CD (rol OIDC para GitHub Actions)
+github_org                        = "tu-usuario-o-org"
+github_repo                       = "angular-aws-static-hosting"
+allowed_branches                  = ["main"]
+create_github_oidc_provider       = true
+# existing_github_oidc_provider_arn = "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com"
+
+# Deben coincidir con los outputs de infrastructure/bootstrap
+state_bucket_name = "TU-BUCKET-UNICO-DE-STATE"
+lock_table_name    = "terraform-state-locks"
+
+tags = {
+  Project     = "angular-aws-static-hosting"
+  Environment = "prod"
+  ManagedBy   = "terraform"
+}

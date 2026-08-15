@@ -1,0 +1,51 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow eyebrow--dark">Servicios</p>
+    <h1>Un servicio técnico para cada fase de tu proyecto</h1>
+    <p class="page-hero__lead">
+      Desde el estudio de viabilidad hasta la entrega final, ofrecemos capacidad de
+      ejecución propia en obra civil, residencial, industrial y reformas.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container services-grid">
+    @for (service of services; track service.title) {
+      <article class="service-detail" appScrollReveal>
+        <div class="service-detail__icon">
+          <app-icon [name]="service.icon" [size]="28" />
+        </div>
+        <h2>{{ service.title }}</h2>
+        <p>{{ service.description }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="section section--alt process">
+  <div class="container">
+    <div class="section-head section-head--center" appScrollReveal>
+      <p class="eyebrow" style="margin-inline:auto">Cómo trabajamos</p>
+      <h2 class="section-title">Un proceso claro, de principio a fin</h2>
+    </div>
+
+    <ol class="process__steps">
+      <li appScrollReveal><span>01</span><h3>Estudio y viabilidad</h3><p>Analizamos el proyecto, el terreno y los condicionantes técnicos y normativos.</p></li>
+      <li appScrollReveal><span>02</span><h3>Proyecto ejecutivo</h3><p>Diseño de ingeniería detallado, presupuesto cerrado y planificación de plazos.</p></li>
+      <li appScrollReveal><span>03</span><h3>Ejecución de obra</h3><p>Construcción con equipo propio, control de calidad y seguridad continuos.</p></li>
+      <li appScrollReveal><span>04</span><h3>Entrega y postventa</h3><p>Entrega documentada y acompañamiento durante el periodo de garantía.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="container cta-final__inner" appScrollReveal>
+    <h2>Hablemos de tu próximo proyecto</h2>
+    <p>Nuestro equipo técnico te da una primera valoración sin compromiso.</p>
+    <a routerLink="/contacto" class="btn btn--primary">
+      Solicitar presupuesto
+      <app-icon name="arrow-right" [size]="18" />
+    </a>
+  </div>
+</section>

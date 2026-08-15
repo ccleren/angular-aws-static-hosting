@@ -1,0 +1,55 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow eyebrow--dark">Proyectos</p>
+    <h1>Más de 340 proyectos entregados en toda la península</h1>
+    <p class="page-hero__lead">
+      Una muestra de obra civil, residencial, industrial y reformas ejecutadas por
+      nuestro equipo en la última década.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="filters" role="group" aria-label="Filtrar proyectos por categoría">
+      @for (category of categories; track category) {
+        <button
+          type="button"
+          class="filters__chip"
+          [class.is-active]="activeFilter() === category"
+          (click)="setFilter(category)"
+        >
+          {{ category }}
+        </button>
+      }
+    </div>
+
+    <div class="projects-grid">
+      @for (project of filteredProjects(); track project.name) {
+        <article class="project-card" appScrollReveal>
+          <div class="project-card__media" [attr.data-category]="project.category">
+            <span>{{ project.category }}</span>
+          </div>
+          <div class="project-card__body">
+            <h3>{{ project.name }}</h3>
+            <p class="project-card__meta">{{ project.location }} · {{ project.year }}</p>
+            <p>{{ project.description }}</p>
+          </div>
+        </article>
+      } @empty {
+        <p class="projects-grid__empty">No hay proyectos en esta categoría todavía.</p>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="container cta-final__inner" appScrollReveal>
+    <h2>¿Quieres ver tu proyecto aquí?</h2>
+    <p>Cuéntanos qué necesitas construir y preparamos una propuesta técnica.</p>
+    <a routerLink="/contacto" class="btn btn--primary">
+      Solicitar presupuesto
+      <app-icon name="arrow-right" [size]="18" />
+    </a>
+  </div>
+</section>

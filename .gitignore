@@ -1,0 +1,27 @@
+# --- Terraform ---
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+**/terraform.tfvars
+**/*.auto.tfvars
+!**/terraform.tfvars.example
+
+# --- Angular / Node ---
+node_modules/
+dist/
+.angular/
+
+# --- Editor / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

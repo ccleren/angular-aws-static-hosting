@@ -1,0 +1,79 @@
+<section class="page-hero">
+  <div class="container">
+    <p class="eyebrow eyebrow--dark">Nosotros</p>
+    <h1>Más de dos décadas construyendo con criterio técnico</h1>
+    <p class="page-hero__lead">
+      Somos un equipo de ingenieros, arquitectos técnicos y jefes de obra unidos por
+      la misma exigencia: hacer bien las cosas, a la primera.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container mission-grid">
+    <article class="mission-card" appScrollReveal>
+      <app-icon name="compass" [size]="28" />
+      <h2>Misión</h2>
+      <p>
+        Ejecutar proyectos de construcción con precisión de ingeniería, seguridad real
+        y cumplimiento estricto de plazos, generando confianza duradera con cada cliente.
+      </p>
+    </article>
+    <article class="mission-card" appScrollReveal>
+      <app-icon name="shield" [size]="28" />
+      <h2>Visión</h2>
+      <p>
+        Ser el referente técnico en construcción de infraestructura civil e industrial
+        en el sur de Europa, reconocidos por la calidad de ejecución de nuestro equipo.
+      </p>
+    </article>
+  </div>
+</section>
+
+<section class="section section--alt timeline-section">
+  <div class="container">
+    <div class="section-head section-head--center" appScrollReveal>
+      <p class="eyebrow" style="margin-inline:auto">Nuestra historia</p>
+      <h2 class="section-title">Dos décadas de crecimiento constante</h2>
+    </div>
+
+    <ol class="timeline">
+      @for (milestone of milestones; track milestone.year) {
+        <li appScrollReveal>
+          <span class="timeline__year">{{ milestone.year }}</span>
+          <p>{{ milestone.text }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<section class="section team-section">
+  <div class="container">
+    <div class="section-head section-head--center" appScrollReveal>
+      <p class="eyebrow" style="margin-inline:auto">Equipo</p>
+      <h2 class="section-title">Las personas detrás de cada proyecto</h2>
+    </div>
+
+    <div class="team-grid">
+      @for (member of team; track member.name) {
+        <article class="team-card" appScrollReveal>
+          <div class="team-card__avatar">{{ member.initials }}</div>
+          <h3>{{ member.name }}</h3>
+          <p>{{ member.role }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="container cta-final__inner" appScrollReveal>
+    <h2>Trabajemos juntos en tu próximo proyecto</h2>
+    <p>Escríbenos y te presentamos al equipo que llevará tu proyecto de principio a fin.</p>
+    <a routerLink="/contacto" class="btn btn--primary">
+      Contactar
+      <app-icon name="arrow-right" [size]="18" />
+    </a>
+  </div>
+</section>

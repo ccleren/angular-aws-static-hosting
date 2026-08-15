@@ -1,0 +1,44 @@
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <div class="header__brand-mark">N</div>
+      <p class="footer__tagline">
+        Construcciones Nexus construye infraestructura civil, residencial e industrial
+        con ingeniería de precisión desde 2003.
+      </p>
+    </div>
+
+    <div class="footer__col">
+      <h3>Navegación</h3>
+      <ul>
+        <li><a routerLink="/">Inicio</a></li>
+        <li><a routerLink="/servicios">Servicios</a></li>
+        <li><a routerLink="/proyectos">Proyectos</a></li>
+        <li><a routerLink="/nosotros">Nosotros</a></li>
+        <li><a routerLink="/contacto">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h3>Contacto</h3>
+      <ul>
+        <li>
+          <app-icon name="map-pin" [size]="16" />
+          <span>Av. de la Ingeniería 42, Madrid</span>
+        </li>
+        <li>
+          <app-icon name="phone" [size]="16" />
+          <span>+34 910 000 000</span>
+        </li>
+        <li>
+          <app-icon name="mail" [size]="16" />
+          <span>info&#64;construccionesnexus.example</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>&copy; {{ year }} Construcciones Nexus. Proyecto de demostración — sin actividad comercial real.</p>
+  </div>
+</footer>

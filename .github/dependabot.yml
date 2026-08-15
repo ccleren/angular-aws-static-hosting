@@ -1,0 +1,35 @@
+version: 2
+updates:
+  # Dependencias npm de la app Angular
+  - package-ecosystem: "npm"
+    directory: "/app"
+    schedule:
+      interval: "weekly"
+
+  # Providers de Terraform. Dependabot no rastrea directorios de forma
+  # recursiva: una entrada por cada carpeta con su propio required_providers.
+  - package-ecosystem: "terraform"
+    directory: "/infrastructure/bootstrap"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "terraform"
+    directory: "/infrastructure/environments/prod"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "terraform"
+    directory: "/infrastructure/modules/acm-certificate"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "terraform"
+    directory: "/infrastructure/modules/github-oidc"
+    schedule:
+      interval: "weekly"
+
+  # Actions usadas en los workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
