@@ -1,12 +1,10 @@
 name: Deploy
 
+# Disparo manual únicamente (botón "Run workflow" en la pestaña Actions).
+# Actívalo también en push a main cuando tengas la infraestructura real
+# desplegada (ver infrastructure/README.md, paso 6) — hasta entonces, un
+# trigger automático solo produciría ejecuciones en rojo sin AWS configurado.
 on:
-  push:
-    branches: [main]
-    paths:
-      - "app/**"
-      - "infrastructure/**"
-      - ".github/workflows/deploy.yml"
   workflow_dispatch: {}
 
 # Requerido por aws-actions/configure-aws-credentials para autenticarse
