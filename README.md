@@ -106,5 +106,6 @@ Instrucciones detalladas paso a paso en [`infrastructure/README.md`](infrastruct
 
 ## 📫 Más información
 
+- [`docs/GUIA.md`](docs/GUIA.md) — cómo construir la misma infraestructura a mano en AWS (consola o CLI), sin Terraform ni Git/GitHub, paso a paso.
 - [`app/README.md`](app/README.md) — la app Angular de ejemplo y cómo sustituirla por la tuya.
-- [`infrastructure/README.md`](infrastructure/README.md) — despliegue paso a paso de la infraestructura.
+- [`infrastructure/README.md`](infrastructure/README.md) — referencia técnica de despliegue de la infraestructura.
