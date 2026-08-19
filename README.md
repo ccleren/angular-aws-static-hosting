@@ -26,6 +26,7 @@ ficticia de construcción.
 - 🔁 **CI/CD con GitHub Actions + OIDC** — build, `terraform apply`, sync a S3 e invalidación de CloudFront, sin credenciales estáticas.
 - 🧩 **Backend remoto de Terraform** (S3 + DynamoDB) aislado en su propio paso de bootstrap.
 - 🤖 **Dependabot** configurado para npm, Terraform y GitHub Actions.
+- 🧭 **Guía manual paso a paso** ([`docs/GUIA.md`](docs/GUIA.md)) — la misma infraestructura, construida a mano en la consola de AWS o por CLI, sin Terraform ni Git/GitHub, útil para entender qué hace cada recurso por debajo.
 
 ---
 
@@ -93,6 +94,10 @@ Ver [`app/README.md`](app/README.md) para el detalle de cómo hacerlo.
 4. **Sync a S3 e invalidación de CloudFront** — manual o a través del workflow de GitHub Actions.
 
 Instrucciones detalladas paso a paso en [`infrastructure/README.md`](infrastructure/README.md).
+
+¿Prefieres no usar Terraform y ver exactamente qué recurso de AWS se crea
+en cada paso? Sigue [`docs/GUIA.md`](docs/GUIA.md) — el mismo resultado,
+a mano, por consola o CLI.
 
 ---
 
