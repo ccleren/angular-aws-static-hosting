@@ -65,7 +65,7 @@ aws s3api put-bucket-encryption \
 > Si tu región es `us-east-1`, quita `--create-bucket-configuration` (esa región no lo acepta).
 
 No subas nada al bucket todavía — la política que lo protege depende de la
-distribución de CloudFront, que aún no existe (paso 5).
+distribución de CloudFront, que aún no existe (paso 6).
 
 ---
 
@@ -88,7 +88,7 @@ El campo `DelegationSet.NameServers` de la respuesta trae los 4 nameservers
 — configúralos en tu registrador igual que en la opción de consola.
 
 Guarda el `Id` de la hosted zone (algo como `/hostedzone/Z0123456789`) —
-lo necesitas en los pasos 3 y 6.
+lo necesitas en los pasos 3 y 8.
 
 ---
 
@@ -161,7 +161,7 @@ Es lo que permite a CloudFront leer el bucket privado sin hacerlo público.
 2. **Name**: `tudominio-oac`. **Signing behavior**: *Sign requests (recommended)*. **Origin type**: *S3*.
 3. **Create**.
 
-(También puedes crearlo directamente al añadir el origin S3 al crear la distribución, en el paso 5 — la consola te lo ofrece ahí mismo.)
+(También puedes crearlo directamente al añadir el origin S3 al crear la distribución, en el paso 6 — la consola te lo ofrece ahí mismo.)
 
 ### ⌨️ Por CLI
 ```bash
